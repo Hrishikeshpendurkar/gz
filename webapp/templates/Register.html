@@ -1,0 +1,59 @@
+{% load static %}
+<html>
+  <head>
+    <title>
+      Register
+    </title>
+    <link rel="stylesheet" href="{% static 'css/products_css.css' %}">  
+    <style>
+        body {
+        background-image: url("{% static 'images/bgimage.jpeg'%}");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+      }
+    </style>
+  </head>
+  <body>
+
+    <form action="/Register/" method="post" style="text-align: center;">
+      {% csrf_token %}
+      <h1 style="text-align: center;">Registration Page</h1>
+      <h2>{{error_message}}</h2>
+      <div>
+          <p><label for="firstname"><strong>firstname:</strong> </label>
+          <input name="firstname" type="text" placeholder="Enter firstname" class="form" id="firstname">   
+      </p>
+      <br>
+      <div>
+        <p><label for="lastname"><strong>lastname:</strong> </label>
+        <input name="lastname" type="text" placeholder="Enter lastname" class="form" id="lastname">   
+    </p>
+    <br>
+      <p>
+          <label for="Email"><strong>Email:</strong> </label>
+          <input name="Email" type="email" placeholder="Enter Email" class="form" id="Email">  
+      </p>
+      <br>
+      <p>
+          <label for="Mobile_No"><strong>Mobile No:</strong> </label>
+          <input name="Mobile_No" type="number" placeholder="Enter Mobile no." class="form" id="Mobile_No">  
+      </p>
+      <br>
+      <p>
+          <label for="Address"><strong>Address:</strong> </label>
+          <input name="Address" type="text" placeholder="Enter Address" class="form" id="Address">  
+      </p>
+      <br>
+      <p>
+          <label for="pass1"><strong>Password:</strong> </label>
+          <input name="password" type="password" placeholder="Enter Password" class="form" id="pass">  
+      </p>
+      <p>
+        <label for="pass2"><strong>confirm Password:</strong> </label>
+        <input name="password2" type="password" placeholder="Confirm Password" class="form" id="password">  
+    </p>
+      <input name="login" type="submit" value="login" onclick="confirm('will u submit confirmed?')">
+    </form>
+  </body>
+</html>

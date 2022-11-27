@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>
+      Login
+    </title>
+  </head>
+  <body>
+    <!-- This is Login page
+    hi this is {{username}} -->
+    <form action="/Login/" method="post" style="text-align: center;">
+      {% csrf_token %}
+      <h1 style="text-align: center;">Login</h1>
+      <h2>{{error_message}}</h2>
+      <div>
+          <p><label for="Email"><strong>Email:</strong> </label>
+          <input name="Email" type="text" placeholder="Enter Email" class="form" id="Email">   
+      </p>
+      <br>
+      <p>
+          <label for="pass"><strong>Password:</strong> </label>
+          <input name="password" type="password" placeholder="Enter Password" class="form" id="password">  
+      </p>
+      <input name="login" type="submit" value="login" onclick="confirm('will u submit confirmed?')">
+    </form>
+    <a href="/Register/"><input name="Register" type="button" value="Register" onclick="confirm('Are you sure you want to register?')"></a>
+  </body>
+</html>

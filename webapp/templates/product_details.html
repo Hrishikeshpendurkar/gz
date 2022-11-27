@@ -1,0 +1,281 @@
+{% load cart %}
+{% load custom_filter %}
+{% load static %}
+<html>
+
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="{% static 'css/products_css.css' %}">  
+    <style>
+        body {
+        background-image: url("{% static 'images/bgimage.jpeg'%}");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+      }
+    </style>
+</head>
+
+<body >
+    {% block navbar %}
+        {% include 'assets/navbar.html' %}
+        {% endblock navbar %}
+        <div class="row">
+            <div class="column">
+                <img src="{{CDN_DOMAIN}}{{product_data.product_image}}" alt="{{product.name}}" style="width:100%">
+            </div>
+            <div class="column" style="background-color:white">
+                    <p> <Label>{{product_data.category}}</label></p>
+                    <p><Label>{{product_data.name}}</Label></p>
+                    <p><Label>MRP-: {{product_data.price|currency}}</Label>
+                        <Label>Quantity {{product_data.quantity}}</Label>
+                    </p>
+                    <!-- <h3>is_in_cart?</h3>{{ product_data | is_in_cart:request.session.cart }} -->
+
+                    <div>
+                        {% if product_data|is_in_cart:request.session.cart %}
+                        <div>
+                            <form action="/product_details/{{product_data.id}}" method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name="product_id" value="{{product_data.id}}">
+                            <input hidden type="text" name="remove" value="True">
+                            <input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+
+                        </form>
+
+                            <div class="text-center col">{{product_data|cart_quantity:request.session.cart}} in Cart</div>
+
+                            <form action="/product_details/{{product_data.id}}" method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name="product_id" value="{{product_data.id}}">
+                            <input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+
+                            </form>
+                        </div>
+                        {% else %}
+                        <div>
+                            <form action="/product_details/{{product_data.id}}" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="product_id" value="{{product_data.id}}" hidden>
+                                <input type="submit" value="Add To Cart">
+                            </form>
+                        </div>
+
+                        {% endif %}
+                    </div>
+
+                    <p><a href="cart.html"><button type="submit" value="Buy_now">Buy now</button></a>
+
+
+                    </p>
+                    <p> To be Delivered In:-4-5 days</p>
+            </div>
+            <div>
+                    <table Border="1" style="width:100%" style="height:1000%" >
+                        {% if product_data.Screen %}
+                        <tr>
+                            <th>Screen</th>
+                            <td>{{product_data.Screen}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Processor %}
+                        <tr>
+                            <th>Processor</th>
+                            <td>{{product_data.Processor}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.GPU %}
+                        <tr>
+                            <th>GPU</th>
+                            <td>{{product_data.GPU}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Ram %}
+                        <tr>
+                            <th>Ram</th>
+                            <td>{{product_data.Ram}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Storage %}
+                        <tr>
+                            <th>Storage</th>
+                            <td>{{product_data.Storage}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Operating_System %}
+                        <tr>
+                            <th>Operating System</th>
+                            <td>{{product_data.Operating_System}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Colour %}
+                        <tr>
+                            <th>Colour</th>
+                            <td>{{product_data.Colour}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Connector_Type %}
+                        <tr>
+                            <th>Connector Type</th>
+                            <td>{{product_data.Connector_Type}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Special_Feature %}
+                        <tr>
+                            <th>Special Feature</th>
+                            <td>{{product_data.Special_Feature}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Cuda_Cores %}
+                        <tr>
+                            <th>Cuda_Cores</th>
+                            <td>{{product_data.Cuda_Cores}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Memory_Size %}
+                        <tr>
+                            <th>Memory_Size</th>
+                            <td>{{product_data.Memory_Size}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Interface_Width %}
+                        <tr>
+                            <th>Interface_Width</th>
+                            <td>{{product_data.Interface_Width}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Display_Connectors %}
+                        <tr>
+                            <th>Display Connectors</th>
+                            <td>{{product_data.Display_Connectorse}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Socket %}
+                        <tr>
+                            <th>Socket</th>
+                            <td>{{product_data.Socket}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Model_Name %}
+                        <tr>
+                            <th>Model Name</th>
+                            <td>{{product_data.Model_Name}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Brand %}
+                        <tr>
+                            <th>Brand</th>
+                            <td>{{product_data.Brand}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Chipset %}
+                        <tr>
+                            <th>Chipset</th>
+                            <td>{{product_data.Chipset}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Dimensions %}
+                        <tr>
+                            <th>Dimensions</th>
+                            <td>{{product_data.Dimensions}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Form_Factor %}
+                        <tr>
+                            <th>Form_Factor</th>
+                            <td>{{product_data.Form_Factor}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Platform %}
+                        <tr>
+                            <th>Platform</th>
+                            <td>{{product_data.Platform}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Core %}
+                        <tr>
+                            <th>Core</th>
+                            <td>{{product_data.Core}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Series %}
+                        <tr>
+                            <th>Series</th>
+                            <td>{{product_data.Series}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Threads %}
+                        <tr>
+                            <th>Threads</th>
+                            <td>{{product_data.Threads}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Unlocked %}
+                        <tr>
+                            <th>Unlocked</th>
+                            <td>{{product_data.Unlocked}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Memory_Slot %}
+                        <tr>
+                            <th>Memory Slot</th>
+                            <td>{{product_data.Memory_Slot}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Size %}
+                        <tr>
+                            <th>Size</th>
+                            <td>{{product_data.Size}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Boast_Clock %}
+                        <tr>
+                            <th>Boast_Clock</th>
+                            <td>{{product_data.Boast_Clock}}</td>
+                        </tr>
+                        {% endif %}
+                        
+                        {% if product_data.Maximum_Resolution %}
+                        <tr>
+                            <th>Maximum Resolution</th>
+                            <td>{{product_data.Maximum_Resolution}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Kit_Type %}
+                        <tr>
+                            <th>Kit_Type</th>
+                            <td>{{product_data.Kit_Type}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Certification %}
+                        <tr>
+                            <th>Certification</th>
+                            <td>{{product_data.Certification}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Modular %}
+                        <tr>
+                            <th>Modular</th>
+                            <td>{{product_data.Modular}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Wattage %}
+                        <tr>
+                            <th>Wattage</th>
+                            <td>{{product_data.Wattage}}</td>
+                        </tr>
+                        {% endif %}
+                        {% if product_data.Capacity %}
+                        <tr>
+                            <th>Capacity</th>
+                            <td>{{product_data.Capacity}}</td>
+                        </tr>
+                        {% endif %}
+                        
+                        
+                    </table>
+            </div>
+        </div>
+</body>
+
+</html>
